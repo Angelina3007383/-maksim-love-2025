@@ -63,7 +63,7 @@
     -webkit-backdrop-filter: blur(20px);
     border: 2px solid rgba(255, 105, 180, 0.35);
     border-radius: 35px;
-    padding: 50px 35px;
+    padding: 45px 30px;
     text-align: center;
     box-shadow: 0 0 80px rgba(255, 20, 100, 0.5), inset 0 0 60px rgba(255, 105, 180, 0.08);
     animation: cardGlow 4s ease-in-out infinite;
@@ -73,7 +73,7 @@
     50% { box-shadow: 0 0 120px rgba(255, 20, 100, 0.85), inset 0 0 80px rgba(255, 105, 180, 0.18); }
   }
   .big-heart {
-    font-size: 85px;
+    font-size: 80px;
     display: block;
     margin-bottom: 15px;
     animation: beat 1.1s ease-in-out infinite;
@@ -84,12 +84,22 @@
     50% { transform: scale(1.28); }
   }
   h1 {
-    font-size: 32px;
+    font-size: 30px;
     color: #fff;
     margin-bottom: 20px;
     text-shadow: 0 0 20px #ff4d6d, 0 0 40px #ff0066;
     font-style: italic;
-    letter-spacing: 0.5px;
+    animation: fadeIn 2s ease;
+  }
+  .photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(255, 105, 180, 0.7);
+    box-shadow: 0 0 40px rgba(255, 20, 100, 0.8);
+    margin: 10px auto 20px;
+    display: block;
     animation: fadeIn 2s ease;
   }
   .divider {
@@ -108,12 +118,12 @@
     opacity: 0;
     animation: fadeIn 2s ease forwards;
   }
-  .message:nth-child(1) { animation-delay: 0.5s; }
-  .message:nth-child(2) { animation-delay: 1s; }
-  .message:nth-child(3) { animation-delay: 1.5s; }
-  .message:nth-child(4) { animation-delay: 2s; }
-  .message:nth-child(5) { animation-delay: 2.5s; }
-  .message:nth-child(6) { animation-delay: 3s; }
+  .message:nth-of-type(1) { animation-delay: 0.5s; }
+  .message:nth-of-type(2) { animation-delay: 1s; }
+  .message:nth-of-type(3) { animation-delay: 1.5s; }
+  .message:nth-of-type(4) { animation-delay: 2s; }
+  .message:nth-of-type(5) { animation-delay: 2.5s; }
+  .message:nth-of-type(6) { animation-delay: 3s; }
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(15px); }
     to { opacity: 1; transform: translateY(0); }
@@ -134,28 +144,121 @@
     animation: fadeIn 2s ease forwards;
     animation-delay: 3.5s;
   }
+  .timer {
+    margin: 25px auto;
+    padding: 15px 20px;
+    background: rgba(255, 105, 180, 0.15);
+    border: 1px solid rgba(255, 105, 180, 0.4);
+    border-radius: 20px;
+    font-size: 16px;
+    color: #ffb3c6;
+    text-shadow: 0 0 10px #ff4d6d;
+  }
+  .timer-number {
+    display: block;
+    font-size: 32px;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 0 0 20px #ff0066;
+    margin-top: 5px;
+  }
+  .secret-btn {
+    margin-top: 25px;
+    padding: 15px 30px;
+    font-size: 17px;
+    font-family: Georgia, serif;
+    color: #fff;
+    background: linear-gradient(135deg, #ff0066, #ff4d6d, #ffb3c6);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 0 25px rgba(255, 20, 100, 0.8);
+    transition: all 0.3s;
+    animation: btnPulse 2s ease-in-out infinite;
+  }
+  @keyframes btnPulse {
+    0%, 100% { box-shadow: 0 0 25px rgba(255, 20, 100, 0.8); }
+    50% { box-shadow: 0 0 45px rgba(255, 20, 100, 1); }
+  }
+  .secret-btn:active { transform: scale(0.95); }
+  .secret-text {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(255, 105, 180, 0.15);
+    border: 1px solid rgba(255, 105, 180, 0.4);
+    border-radius: 20px;
+    font-size: 17px;
+    color: #ffe0eb;
+    line-height: 1.7;
+    animation: fadeIn 1s ease;
+  }
+  .music-btn {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 100;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255, 105, 180, 0.3);
+    border: 1px solid rgba(255, 105, 180, 0.6);
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(255, 20, 100, 0.5);
+  }
   @media (max-width: 500px) {
-    .card { padding: 40px 22px; border-radius: 25px; }
-    h1 { font-size: 24px; }
-    .message { font-size: 16px; }
-    .big-heart { font-size: 65px; }
+    .card { padding: 35px 20px; border-radius: 25px; }
+    h1 { font-size: 23px; }
+    .message { font-size: 15px; }
+    .big-heart { font-size: 60px; }
     .name { font-size: 18px; }
+    .photo { width: 160px; height: 160px; }
+    .timer-number { font-size: 26px; }
   }
 </style>
 </head>
 <body>
 
+<button class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</button>
+
+<audio id="bgMusic" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_946bc7e5b0.mp3?filename=romantic-piano-124383.mp3" type="audio/mpeg">
+</audio>
+
 <div class="card">
   <span class="big-heart">❤️</span>
   <h1>Моему любимому Максиму</h1>
+
+  <img class="photo" src="IMG_0452.jpeg" alt="Наше фото">
+
   <div class="divider"></div>
+
   <p class="message"><span class="name">Максим</span>, любимый мой...</p>
   <p class="message">Я так сильно тебя люблю, что словами не передать 💕</p>
   <p class="message">Каждую минуту я очень скучаю по тебе — по твоему голосу, улыбке, твоим тёплым рукам.</p>
   <p class="message">Ты — моё самое родное сердце 💖</p>
   <p class="message">Я буду очень сильно ждать тебя, сколько бы времени ни прошло.</p>
   <p class="message">Ты — мой человек, моя судьба, моё всё ✨</p>
+
   <div class="divider"></div>
+
+  <div class="timer">
+    Мы вместе уже:
+    <span class="timer-number" id="timer">считаем...</span>
+  </div>
+
+  <button class="secret-btn" onclick="showSecret()">💌 Нажми на меня</button>
+  <div class="secret-text" id="secretText">
+    Ты — самый лучший, самый родной, самый любимый.<br>
+    Я тебя никогда не отпущу и всегда буду рядом 💖<br>
+    Спасибо, что ты есть в моей жизни ✨
+  </div>
+
+  <div class="divider"></div>
+
   <p class="signature">
     Люблю тебя больше всего на свете...<br>
     Твоя навсегда 💗
@@ -179,6 +282,7 @@
   for (let i = 0; i < 20; i++) {
     setTimeout(createHeart, i * 120);
   }
+
   function createStar() {
     const star = document.createElement('div');
     star.className = 'star';
@@ -188,7 +292,46 @@
     document.body.appendChild(star);
   }
   for (let i = 0; i < 60; i++) createStar();
+
+  function showSecret() {
+    const secret = document.getElementById('secretText');
+    if (secret.style.display === 'block') {
+      secret.style.display = 'none';
+    } else {
+      secret.style.display = 'block';
+    }
+  }
+
+  let musicPlaying = false;
+  function toggleMusic() {
+    const music = document.getElementById('bgMusic');
+    const btn = document.getElementById('musicBtn');
+    if (musicPlaying) {
+      music.pause();
+      btn.textContent = '🎵';
+      musicPlaying = false;
+    } else {
+      music.play();
+      btn.textContent = '⏸';
+      musicPlaying = true;
+    }
+  }
+
+  const startDate = new Date('2023-03-01');
+  function updateTimer() {
+    const now = new Date();
+    const diff = now - startDate;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+    document.getElementById('timer').textContent = 
+      days + ' дн. ' + hours + ' ч. ' + minutes + ' мин. ' + seconds + ' сек.';
+  }
+  setInterval(updateTimer, 1000);
+  updateTimer();
 </script>
 
 </body>
 </html>
+  
